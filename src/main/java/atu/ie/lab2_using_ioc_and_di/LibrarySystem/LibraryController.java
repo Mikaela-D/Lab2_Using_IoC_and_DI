@@ -21,6 +21,5 @@ public class LibraryController {
     public ResponseEntity<String> addBook(@RequestBody Book book) {
         libraryService.addBook(book);
         return ResponseEntity.ok("Book added to the library");
-
     }
 }
