@@ -7,22 +7,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/library")
 public class LibraryController {
-    @RestController
-    @RequestMapping("/library")
-    public class LibraryController {
+    private LibraryService libraryService;
 
-        private LibraryService libraryService;
+    @Autowired
+    public void setLibraryService(LibraryService libraryService) {
+        this.libraryService = libraryService;
+    }
 
-        @Autowired
-        public void setLibraryService(LibraryService libraryService) {
-            this.libraryService = libraryService;
-        }
+    @PostMapping("/addBook")
+    public ResponseEntity<String> addBook(@RequestBody Book book) {
+        libraryService.addBook(book);
+        return ResponseEntity.ok("Book added to the library");
 
-        @PostMapping("/addBook")
-        public ResponseEntity<String> addBook(@RequestBody Book book) {
-            libraryService.addBook(book);
-            return ResponseEntity.ok("Book added to the library");
-        }
     }
 }
